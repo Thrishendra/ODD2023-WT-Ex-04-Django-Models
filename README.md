@@ -18,7 +18,7 @@ Django-admin startproject mymodels
 Python manage.py startapp myapp
 # STEP 2 :
 create a user_profile models in model.py
-
+```
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -27,21 +27,21 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-
+```
 # STEP 3 :
 Add the models in the admin interface using the code in admin.py
 
-
+```
 from django.contrib import admin
 
 # Register your models here.
 from .models import UserProfile
 
 admin.site.register(UserProfile)
-
+```
 # STEP 4 :
 Write the function based view to render the data from the models to the template in view.py
-
+```
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
@@ -58,10 +58,10 @@ def user_profile(request):
         "lastname": user_profile.user.last_name,  # Access last name through the related User model
     }
     return render(request, 'myapp/user_profiles.html', context)
-
+```
  # STEP 5 :
 Setup the url path for the templates using urls.py
-
+```
 """mymodels URL Configuration
 
 The urlpatterns list routes URLs to views. For more information please see:
@@ -86,7 +86,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('profile/', views.user_profile, name='user_profile'),
 ]
-
+```
 # STEP 6:
 In settings.py file add the app created.
 
@@ -96,7 +96,7 @@ Python mange.py makemigrations
 Python manage.py migrate
 
 Create a template as user_profiles.html
-
+```
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,7 +111,7 @@ Create a template as user_profiles.html
     <p><strong>Custom Profile Data:</strong> {{ user_profile.custom_field }}</p>
 </body>
 </html>
-
+```
 # STEP 7:
 Run the program using the command
 
@@ -122,6 +122,7 @@ In the admin/ page you can view the models created
 And  in the user_profile template page you can see the profile page of the user.
 
 # OUTPUT : 
+![WhatsApp Image 2023-11-16 at 09 23 56_829e9c55](https://github.com/Thrishendra/ODD2023-WT-Ex-04-Django-Models/assets/145742464/47f050bc-ab6c-45d9-90aa-9b1dbd55e6e2)
 
 # RESULT :
 User Profile displayed successfully using Django Models.
